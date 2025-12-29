@@ -1,6 +1,6 @@
 # 🦯 SmartWand / Crutch Genie
 
-[![Estado del Proyecto](https://img.shields.io/badge/Estado-Prototipo%20Activo-yellow)](https://github.com/tu-usuario/smartwand) [![Licencia](https://img.shields.io/badge/Licencia-MIT-green)](LICENSE) [![Hardware](https://img.shields.io/badge/Hardware-Reciclado%2FDIY-blue)](https://github.com/tu-usuario/smartwand)
+[![Estado del Proyecto](https://img.shields.io/badge/Estado-Prototipo%20Activo-yellow)](https://github.com/Charran78/smartwand) [![Licencia](https://img.shields.io/badge/Licencia-MIT-green)](LICENSE) [![Hardware](https://img.shields.io/badge/Hardware-Reciclado%2FDIY-blue)](https://github.com/Charran78/smartwand)
 
 **SmartWand** (también llamado **Crutch Genie**) es una plataforma de código abierto que transforma una muleta o bastón en un asistente inteligente y conectado. Nace de la necesidad personal de aumentar la autonomía y seguridad, combinando hardware reciclado con software que aprovecha al máximo la inteligencia y servicios gratuitos de un teléfono Android.
 
@@ -152,4 +152,4 @@ Este proyecto está distribuido bajo la Licencia MIT. Consulta el archivo [LICEN
 *   **Proyecto Inspirado en**: La necesidad real de mejorar la autonomía y la filosofía de reutilizar y dar nueva vida a la tecnología.
 
 ---
-*¿Preguntas, ideas o quieres compartir tu propia adaptación? ¡Abre un Issue o un Discussion en el repositorio!*
+*¿Preguntas, ideas o quieres compartir tu propia adaptación? ¡Abre un Issue o una Discusión en el repositorio!*
