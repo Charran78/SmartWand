@@ -4,7 +4,12 @@
   <img src="https://github.com/Charran78/SmartWand/blob/main/genie_banner.png" alt="Demo" width="full">
 </div>
 
-[![Estado del Proyecto](https://img.shields.io/badge/Estado-Prototipo%20Activo-yellow)](https://github.com/Charran78/smartwand) [![Licencia](https://img.shields.io/badge/Licencia-MIT-green)](LICENSE) [![Hardware](https://img.shields.io/badge/Hardware-Reciclado%2FDIY-blue)](https://github.com/Charran78/smartwand)
+[![Estado del Proyecto](https://img.shields.io/badge/Estado-En%20Desarrollo%20Activo-brightgreen)](https://github.com/Charran78/SmartWand)
+[![Licencia](https://img.shields.io/badge/Licencia-MIT-green)](LICENSE)
+[![Hardware](https://img.shields.io/badge/Hardware-Reciclado%2FDIY-blue)](https://github.com/Charran78/SmartWand)
+[![Android](https://img.shields.io/badge/Android-14%2B%20(API%2034)-3DDC84?logo=android)](https://developer.android.com)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.0-7F52FF?logo=kotlin)](https://kotlinlang.org)
+[![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-Material%203-4285F4?logo=jetpackcompose)](https://developer.android.com/jetpack/compose)
 
 **SmartWand** (también llamado **Crutch Genie**) es una plataforma de código abierto que transforma una muleta o bastón en un asistente inteligente y conectado. Nace de la necesidad personal de aumentar la autonomía y seguridad, combinando hardware reciclado con software que aprovecha al máximo la inteligencia y servicios gratuitos de un teléfono Android.
 
@@ -18,142 +23,172 @@
 | :--- | :--- | :--- |
 | **🛠️ Hardware Básico (McGyver Crutches)** | ✅ **Implementado** | Linterna LED, baliza trasera, pinza porta-bolsas, llave magnética, bocina, energía con batería 18650 reciclada. |
 | **⌚ Interfaz Smartwatch Genérico** | ✅ **Implementado** | Control de música, notificaciones, llamadas y más mediante un smartwatch económico revivido. |
-| **🧠 Núcleo de App Android (Cerebro)** | 🚧 **En Desarrollo** | App que centraliza la lógica, conecta todos los componentes y gestiona las APIs. |
-| **🤖 Asistente "Crutch Genie" (IA)** | 📅 **Planificado** | Asistente especializado usando Gemini API (gratuita) para navegación contextual y respuestas inteligentes. |
+| **🧠 Núcleo de App Android (Cerebro)** | 🚧 **En Desarrollo** | App en Kotlin + Jetpack Compose con arquitectura MVVM, Room database, y navegación Material 3. |
+| **🤖 Asistente "Crutch Genie" (IA)** | 🚧 **En Desarrollo** | Integración con Gemini API preparada, system prompt especializado para contexto de accesibilidad. |
 | **📟 App Companion Wear OS** | 📅 **Planificado** | App para relojes Wear OS para control por gestos e interfaz mínima. |
-| **📡 Comunicación BLE con ESP32** | 📅 **Planificado** | Reemplazo de conexiones cableadas por un módulo ESP32 en la muleta para una comunicación robusta y programable. |
+| **📡 Comunicación BLE con ESP32** | 📅 **Planificado** | Módulo ESP32 en la muleta para comunicación robusta y programable. |
 
 ---
 
 ## 🏗️ Arquitectura del Sistema
 
-El sistema está diseñado en capas independientes para facilitar el mantenimiento y la evolución a largo plazo.
+El sistema está diseñado en capas independientes siguiendo **Clean Architecture** y patrón **MVVM**:
 
 ```mermaid
 graph TB
-    subgraph "Capa Física (Muleta/Bastón)"
-        A[Sensores<br>Botones] --> B[Microcontrolador<br>ESP32 - Previsto];
-        C[Actuadores<br>LEDs, Vibrador] --> B;
+    subgraph "UI Layer (Jetpack Compose)"
+        A[DashboardScreen] --> B[DashboardViewModel]
+        C[EmergencyScreen] --> D[EmergencyViewModel]
+        E[GenieScreen] --> F[GenieViewModel]
     end
-
-    subgraph "Capa de Interfaz (Wear OS)"
-        D[Smartwatch Wear OS] --> E[App Companion<br>Interfaz mínima];
+    
+    subgraph "Data Layer"
+        G[Repositories] --> H[Room DAOs]
+        H --> I[(SQLite Database)]
     end
-
-    subgraph "Capa de Inteligencia (Teléfono)"
-        F[App Android Principal<br/>'Cerebro' del sistema];
-        F --> G[Crutch Genie<br/>Motor de IA/Asistente];
-        F --> H[Integración con APIs<br/>Maps, Asistente, IoT];
+    
+    subgraph "External Services"
+        J[Gemini API]
+        K[Google Maps]
+        L[BLE - ESP32]
     end
-
-    subgraph "Capa de Servicios"
-        I[Google Maps Platform];
-        J[Gemini API / Nano];
-        K[Google Assistant];
-    end
-
-    B -- BLE --> F;
-    E -- BLE/Internet --> F;
-    F --> I;
-    F --> J;
-    F --> K;
+    
+    B --> G
+    D --> G
+    F --> G
+    F --> J
+    B --> L
 ```
 
----
+### Stack Tecnológico
 
-## 🚀 Primeros Pasos (Para Desarrolladores)
-
-### Prerrequisitos de Hardware
-*   **Prototipo de Muleta**: Con componentes básicos soldados y alimentación (batería 18650 con protección TP4056).
-*   **Smartphone Android**: Con soporte para BLE y Android 8.0+ (recomendado 10+).
-*   **Smartwatch con Wear OS** *(Para desarrollo futuro)*: Cualquier modelo con Wear OS 3+ (ej: Fossil Gen 5, Samsung Galaxy Watch4+, Xiaomi Watch 2).
-*   **ESP32 DevKit** *(Para desarrollo futuro)*: Para la versión avanzada de comunicación con la muleta.
-
-### Prerrequisitos de Software
-*   **Android Studio** (versión Flamingo o superior) con el SDK de Wear OS instalado.
-*   **Git** para control de versiones.
-*   Una cuenta de Google con acceso a:
-    *   **Google Cloud Platform** (para habilitar APIs como Maps y Gemini - nivel gratuito).
-    *   **Google Assistant SDK** (para integración con dispositivos IoT).
+| Componente | Tecnología |
+|------------|------------|
+| **Lenguaje** | Kotlin 2.0 |
+| **UI** | Jetpack Compose + Material 3 |
+| **Arquitectura** | MVVM + Clean Architecture |
+| **DI** | Hilt |
+| **Database** | Room |
+| **Async** | Coroutines + Flow |
+| **AI** | Gemini API (gemini-1.5-flash) |
+| **Min SDK** | API 34 (Android 14) |
 
 ---
 
-## ⚙️ Instalación y Configuración
+## 📱 Pantallas de la App
 
-### 1. Clonar el Repositorio
+| Pantalla | Descripción |
+|----------|-------------|
+| **Dashboard** | Hub principal con estado de conexión, acciones rápidas (linterna, bocina, música), y botón de emergencia siempre visible |
+| **Emergency** | Gestión de contactos de emergencia, botón de pánico, historial de caídas |
+| **Devices** | Control de dispositivos IoT (luces, interruptores) |
+| **Genie** | Chat con asistente IA Crutch Genie para rutas accesibles e información contextual |
+| **Settings** | Configuración de idioma, tema, accesibilidad, y API keys |
+
+---
+
+## 🚀 Primeros Pasos
+
+### Prerrequisitos
+
+* **Android Studio** Flamingo o superior
+* **JDK 17**
+* **Dispositivo/Emulador** con Android 14+ (API 34)
+* **Git** para control de versiones
+
+### Instalación
+
 ```bash
-git clone https://github.com/Charan78/smartwand.git
-cd smartwand
+# 1. Clonar el repositorio
+git clone https://github.com/Charran78/SmartWand.git
+cd SmartWand
+
+# 2. Abrir en Android Studio
+# File → Open → seleccionar carpeta "smartwand-app"
+
+# 3. Sincronizar Gradle y ejecutar
+# Run → Run 'app'
 ```
 
-### 2. Configurar el Proyecto en Android Studio
-*   Abre la carpeta `smartwand-app` (para la app del teléfono) y `smartwand-wear` (para la app del reloj) como proyectos independientes en Android Studio.
-*   Sincroniza los proyectos con los archivos Gradle.
+### Configurar Gemini API (Opcional)
 
-### 3. Configurar las APIs y Claves
-1.  En Google Cloud Console, crea un nuevo proyecto o selecciona uno existente.
-2.  Habilita las APIs necesarias:
-    *   **Maps SDK for Android**
-    *   **Gemini API**
-3.  Genera una credencial de tipo **"Clave de API"**.
-4.  Crea un archivo `secrets.properties` en la raíz del módulo de la app del teléfono (`smartwand-app`) con el siguiente contenido:
-```properties
-GOOGLE_MAPS_API_KEY="TU_CLAVE_DE_API_AQUÍ"
-# Las claves para otras APIs se añadirán aquí en el futuro
-```
-5.  En el archivo `build.gradle` a nivel de módulo (`smartwand-app/build.gradle`), asegúrate de cargar estas propiedades y de **NO subir `secrets.properties` a control de versiones**. Añádelo a tu `.gitignore`.
-
-### 4. Ejecutar en Dispositivos
-*   **App del Teléfono**: Conecta tu smartphone Android con la depuración USB activada y ejecuta la configuración `app`.
-*   **App del Reloj (Futuro)**: Conecta tu smartwatch Wear OS vía Bluetooth/ADB o usa un emulador, y ejecuta la configuración `wear`.
+1. Obtén una API key en [Google AI Studio](https://aistudio.google.com/apikey)
+2. En la app: Settings → API → Introduce tu clave
+3. ¡El Crutch Genie estará listo para ayudarte!
 
 ---
 
-## 🤝 Cómo Contribuir
+## 📂 Estructura del Proyecto
 
-¡Las contribuciones, ideas y forks son bienvenidos! Este es un proyecto personal con una visión comunitaria.
-
-1.  **Discute el cambio que deseas hacer**: Abre un **Issue** antes de trabajar en una funcionalidad grande para alinearnos.
-2.  **Haz un Fork del proyecto** y crea una rama para tu funcionalidad (`git checkout -b feature/nueva-funcionalidad`).
-3.  **Realiza tus cambios**, siguiendo la guía de estilo de código existente.
-4.  **Realiza commits descriptivos** (te recomendamos usar [Conventional Commits](https://www.conventionalcommits.org/)).
-5.  **Envía un Pull Request** (PR) detallando los cambios y el problema que resuelven.
-
-### Convención de Commits
-Usamos Conventional Commits para un historial claro:
-*   `feat:` Nueva funcionalidad.
-*   `fix:` Corrección de errores.
-*   `docs:` Cambios en la documentación (como este README).
-*   `refactor:` Cambios en el código que no corrigen errores ni añaden funcionalidades.
-*   `test:` Añadir o corregir tests.
+```
+smartwand-app/
+├── app/src/main/
+│   ├── java/com/smartwand/
+│   │   ├── MainActivity.kt           # Single Activity
+│   │   ├── SmartWandApp.kt            # Hilt Application
+│   │   ├── data/
+│   │   │   ├── local/                 # Room Database + DAOs
+│   │   │   ├── model/                 # Entities
+│   │   │   └── repository/            # Data repositories
+│   │   ├── di/                        # Hilt modules
+│   │   └── ui/
+│   │       ├── navigation/            # Nav routes + NavHost
+│   │       ├── theme/                 # Material 3 theme
+│   │       └── screens/               # 5 screens + ViewModels
+│   └── res/
+│       ├── values/strings.xml         # Español (default)
+│       └── values-en/strings.xml      # English
+└── gradle/libs.versions.toml          # Version catalog
+```
 
 ---
 
 ## 🧭 Hoja de Ruta (Roadmap)
 
-- [ ] **Fase 0: Estabilización del Prototipo Físico** - Mejorar la robustez y seguridad del hardware actual (fusibles, driver para LEDs).
-- [ ] **Fase 1: Núcleo de la App Android** - Desarrollar la app "cerebro" con conexión BLE básica e integración con Google Maps para estimación de rutas.
-- [ ] **Fase 2: Adquisición y Desarrollo para Wear OS** - Conseguir un smartwatch con Wear OS y desarrollar la app companion mínima.
-- [ ] **Fase 3: Integración del "Crutch Genie"** - Diseñar los prompts de sistema e integrar la API de Gemini para crear el asistente contextual.
-- [ ] **Fase 4: Hardware Avanzado** - Integrar el ESP32 en la muleta para una comunicación BLE profesional y añadir sensores (IMU para gestos).
-- [ ] **Fase 5: Comunidad y Documentación** - Publicar guías completas de "Hazlo-tú-mismo" (DIY), planos y fomentar un ecosistema de modificaciones.
+* [x] **Fase 0: Estructura del Proyecto** - Configuración Gradle, arquitectura base
+* [x] **Fase 1.1: UI Screens** - 5 pantallas con Jetpack Compose
+* [x] **Fase 1.2: Data Layer** - Room database, entidades, DAOs, repositorios
+* [x] **Fase 1.3: MVVM** - ViewModels con Hilt y StateFlow
+* [ ] **Fase 1.4: BLE Service** - Stub para futura conexión ESP32
+* [ ] **Fase 2: Genie AI** - Conectar UI con Gemini, voice input
+* [ ] **Fase 3: Emergency System** - SMS alerts, GPS tracking, fall detection
+* [ ] **Fase 4: Wear OS** - App companion para smartwatch
+* [ ] **Fase 5: Hardware** - Integración ESP32, sensores IMU
 
-**¿Te interesa ayudar en alguna fase en concreto?** ¡Mencionalo en los Issues!
+---
+
+## 🤝 Cómo Contribuir
+
+¡Las contribuciones son bienvenidas! Este es un proyecto personal con visión comunitaria.
+
+1. **Abre un Issue** para discutir cambios grandes
+2. **Fork** y crea una rama: `git checkout -b feature/mi-feature`
+3. **Commits** siguiendo [Conventional Commits](https://www.conventionalcommits.org/)
+4. **Pull Request** con descripción detallada
+
+### Convención de Commits
+
+* `feat:` Nueva funcionalidad
+* `fix:` Corrección de errores
+* `docs:` Cambios en documentación
+* `refactor:` Refactorización de código
 
 ---
 
 ## 📄 Licencia
 
-Este proyecto está distribuido bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más información.
+Distribuido bajo Licencia MIT. Ver [LICENSE](LICENSE) para más información.
 
 ---
 
-## 👨‍💻 Autor y Contacto
+## 👨‍💻 Autor
 
-**Pedro** – Ingeniero de software, maker y solucionador de problemas cotidianos.
+**Pedro** – Técnico Superior en Sistemas, maker, y solucionador de problemas cotidianos.
 
-*   **GitHub**: [@Charran78](https://github.com/Charran78)
-*   **Proyecto Inspirado en**: La necesidad real de mejorar la autonomía y la filosofía de reutilizar y dar nueva vida a la tecnología.
+* **GitHub**: [@Charran78](https://github.com/Charran78)
+* **Certificaciones**: OCI AI Foundations, Generative AI Professional, AI Vector Search
+* **Filosofía**: Transformar limitaciones en oportunidades tecnológicas
 
 ---
-*¿Preguntas, ideas o quieres compartir tu propia adaptación? ¡Abre un Issue o una Discusión en el repositorio!*
+
+*¿Preguntas, ideas o quieres compartir tu adaptación? ¡Abre un Issue o Discusión!* 🚀
