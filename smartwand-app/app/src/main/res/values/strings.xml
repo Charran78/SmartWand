@@ -1,0 +1,75 @@
+<resources>
+    <!-- App name -->
+    <string name="app_name">SmartWand</string>
+    
+    <!-- Navigation -->
+    <string name="nav_dashboard">Inicio</string>
+    <string name="nav_dashboard_desc">Pantalla principal</string>
+    <string name="nav_emergency">Emergencia</string>
+    <string name="nav_emergency_desc">Contactos y alertas de emergencia</string>
+    <string name="nav_devices">Dispositivos</string>
+    <string name="nav_devices_desc">Control de dispositivos IoT</string>
+    <string name="nav_genie">Genio</string>
+    <string name="nav_genie_desc">Asistente Crutch Genie</string>
+    <string name="nav_settings">Ajustes</string>
+    <string name="nav_settings_desc">Configuración de la aplicación</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">SmartWand</string>
+    <string name="dashboard_welcome">¡Bienvenido!</string>
+    <string name="dashboard_connection_status">Estado de conexión</string>
+    <string name="dashboard_connected">Conectado</string>
+    <string name="dashboard_disconnected">Desconectado</string>
+    <string name="dashboard_battery">Batería</string>
+    <string name="dashboard_quick_actions">Acciones rápidas</string>
+    
+    <!-- Emergency -->
+    <string name="emergency_title">Emergencia</string>
+    <string name="emergency_contacts">Contactos de emergencia</string>
+    <string name="emergency_add_contact">Añadir contacto</string>
+    <string name="emergency_call_now">¡LLAMAR AHORA!</string>
+    <string name="emergency_send_alert">Enviar alerta</string>
+    <string name="emergency_fall_history">Historial de caídas</string>
+    <string name="emergency_test_alert">Probar alerta</string>
+    
+    <!-- Devices -->
+    <string name="devices_title">Dispositivos</string>
+    <string name="devices_no_devices">No hay dispositivos conectados</string>
+    <string name="devices_add_device">Añadir dispositivo</string>
+    <string name="devices_light">Luz</string>
+    <string name="devices_toggle">Encender/Apagar</string>
+    
+    <!-- Genie -->
+    <string name="genie_title">Crutch Genie</string>
+    <string name="genie_subtitle">Tu asistente inteligente</string>
+    <string name="genie_hint">Pregúntame algo...</string>
+    <string name="genie_send">Enviar</string>
+    <string name="genie_voice">Entrada de voz</string>
+    <string name="genie_thinking">Pensando...</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">Ajustes</string>
+    <string name="settings_general">General</string>
+    <string name="settings_language">Idioma</string>
+    <string name="settings_theme">Tema</string>
+    <string name="settings_theme_light">Claro</string>
+    <string name="settings_theme_dark">Oscuro</string>
+    <string name="settings_theme_system">Sistema</string>
+    <string name="settings_accessibility">Accesibilidad</string>
+    <string name="settings_large_text">Texto grande</string>
+    <string name="settings_high_contrast">Alto contraste</string>
+    <string name="settings_notifications">Notificaciones</string>
+    <string name="settings_about">Acerca de</string>
+    <string name="settings_version">Versión</string>
+    
+    <!-- Common -->
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="delete">Eliminar</string>
+    <string name="edit">Editar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="error">Error</string>
+    <string name="success">Éxito</string>
+    <string name="loading">Cargando...</string>
+    <string name="retry">Reintentar</string>
+</resources>

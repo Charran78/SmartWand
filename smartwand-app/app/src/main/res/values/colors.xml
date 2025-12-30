@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary colors -->
+    <color name="wand_blue">#1976D2</color>
+    <color name="wand_blue_dark">#0D47A1</color>
+    <color name="wand_blue_light">#64B5F6</color>
+    
+    <!-- Emergency colors -->
+    <color name="emergency_red">#D32F2F</color>
+    
+    <!-- Surface colors -->
+    <color name="surface_light">#FFFBFE</color>
+    <color name="surface_dark">#1C1B1F</color>
+</resources>

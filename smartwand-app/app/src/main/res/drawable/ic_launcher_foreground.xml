@@ -1,0 +1,24 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Magic wand icon representing SmartWand -->
+    <group android:translateX="27" android:translateY="27">
+        <!-- Wand body -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M8,46L46,8L48,10L10,48Z" />
+        <!-- Wand tip star -->
+        <path
+            android:fillColor="#FFD700"
+            android:pathData="M50,4L52,10L58,10L53,14L55,20L50,16L45,20L47,14L42,10L48,10Z" />
+        <!-- Sparkles -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M35,15L36,18L39,18L37,20L38,23L35,21L32,23L33,20L31,18L34,18Z" />
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M20,30L21,32L23,32L21.5,33.5L22,36L20,34.5L18,36L18.5,33.5L17,32L19,32Z" />
+    </group>
+</vector>
